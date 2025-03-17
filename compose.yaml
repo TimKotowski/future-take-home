@@ -1,0 +1,25 @@
+---
+services:
+  pg_future:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: future
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: future
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "future" ]
+      interval: 1s
+      timeout: 1s
+      retries: 3
+  future:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./migrations:/migrations
+    depends_on:
+      - pg_future
