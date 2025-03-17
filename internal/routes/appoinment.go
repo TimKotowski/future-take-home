@@ -24,7 +24,7 @@ func NewAppointmentRouteRegister(db *sqlx.DB) RouteRegister {
 }
 
 func (c appointmentRouteRegister) RegisterRoutes(router *chi.Mux) {
-	router.Get("/appointments/v1/slots/{trainerID}", c.controller.GetAppointmentsByTimeRange)
+	router.Get("/appointments/v1/slots/{trainerID}/{startSlot}/{endSlot}", c.controller.GetAppointmentsByTimeRange)
 	router.Get("/appointments/v1/{trainerID}", c.controller.GetAppointmentsByTrainer)
 	router.Post("/appointments/v1/slots/{trainerID}/{userID}", c.controller.CreateAppointments)
 }

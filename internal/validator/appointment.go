@@ -17,6 +17,10 @@ type AppointmentsTimeRangeValidator struct {
 }
 
 func (v AppointmentsTimeRangeValidator) Validate() error {
+	if v.EndSlot == "" || v.StartSlot == "" {
+		return errors.New(fmt.Sprintf("time slots are empty, make sure you submit valid time slots"))
+	}
+
 	start, end, err := utils.ParseStartEndSlots(v.StartSlot, v.EndSlot)
 	if err != nil {
 		return err

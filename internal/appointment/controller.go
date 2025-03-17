@@ -66,15 +66,24 @@ func (c *AppointmentController) GetAppointmentsByTimeRange(w http.ResponseWriter
 		w.Write([]byte("Invalid ID for trainer, make sure its a valid numerical value"))
 		return
 	}
-	var reqBody getAppointmentsByTimeRangeReqBody
-	if err := json.NewDecoder(r.Body).Decode(&reqBody); err != nil {
+
+	startSlot := chi.URLParam(r, "startSlot")
+	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Unable to parse request body"))
+		w.Write([]byte("Invalid ID for trainer, make sure its a valid numerical value"))
 		return
 	}
+
+	endSlot := chi.URLParam(r, "endSlot")
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Invalid ID for trainer, make sure its a valid numerical value"))
+		return
+	}
+
 	v := validator.AppointmentsTimeRangeValidator{
-		StartSlot: reqBody.StartSlot,
-		EndSlot:   reqBody.EndSlot,
+		StartSlot: startSlot,
+		EndSlot:   endSlot,
 	}
 	if err := v.Validate(); err != nil {
 		w.WriteHeader(http.StatusBadRequest)
