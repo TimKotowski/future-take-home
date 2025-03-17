@@ -72,12 +72,15 @@ func main() {
 		route.RegisterRoutes(r)
 	}
 
-	if err := http.ListenAndServe(":8080", r); err != nil {
-		log.Fatal("Unable to listen and serve", err)
-	}
-
+	go func() {
+		if err := http.ListenAndServe(":8080", r); err != nil {
+			log.Fatal("Unable to listen and serve", err)
+		}
+	}()
 	log.Println("Ready to serve traffic...")
+
 	go awaitTerminated(done)
+	<-done
 }
 
 func awaitTerminated(done chan struct{}) {
