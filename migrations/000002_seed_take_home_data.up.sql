@@ -1,4 +1,4 @@
--- Take home requried test data
+-- Take home required test data
 insert into users (id, first_name, email)
 values
   (1, 'test_user_one', 'test_user_one@gmail.com'),

@@ -36,5 +36,3 @@ create table if not exists appointments (
 CREATE INDEX start_end_slots_trainers_composite_idx ON appointments(start_slot, end_slot, trainer_id);
 CREATE INDEX appointments_status_idx on appointments(status);
 CREATE INDEX fk_user_idx ON appointments(user_id);
-
-
