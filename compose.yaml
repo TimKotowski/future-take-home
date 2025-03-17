@@ -9,10 +9,11 @@ services:
       POSTGRES_PASSWORD: 12345
       POSTGRES_DB: future
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "future" ]
-      interval: 1s
-      timeout: 1s
-      retries: 3
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      start_period: 15s
+      retries: 5
   future:
     build:
       dockerfile: Dockerfile
@@ -22,4 +23,6 @@ services:
     volumes:
       - ./migrations:/migrations
     depends_on:
-      - pg_future
+      pg_future:
+        condition: service_healthy
+        restart: true

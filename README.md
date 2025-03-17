@@ -3,6 +3,10 @@
 ## Requirements To Run
 1. Docker installed and able to interact with docker.
 
+It can take some time for the container to finish. 
+`http://localhost:8080/health`
+Make sure to hit this route to indicate that the application is up and running and ready to serve traffic
+
 ## Steps to Run Take home test
 
 ```cgo
@@ -46,3 +50,8 @@ docker compose up
     end_slot
     status
     ```
+    when passing in `status` this indicates if an appointment is scheduled, cancelled, or finished. It's important an appointment has correct states to ensure a trainer can filter by appointments, or make sure they're getting only appointments that are active and not ones that are not relevant anymore.
+  - Status allowed
+    - ACTIVE
+    - CANCELLED
+    - COMPLETED

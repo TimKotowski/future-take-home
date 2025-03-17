@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -53,17 +52,17 @@ func main() {
 			println("issue with migrations", err.Error())
 		}
 	}
-	fmt.Println("Running Future Appointments Application")
-
-	//	var pgErr *pgconn.PgError
-	//	if errors.As(err, &pgErr) {
-	//		fmt.Println("HMMMMMMMM", pgErr.Code, pgErr.SQLState())
-	//		log.Fatal(err.Error())
-	//	}
-	//	return err
-	//}
 
 	r := api.NewApi()
+	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+		if err := db.Ping(); err == nil {
+			w.WriteHeader(http.StatusAccepted)
+			w.Write([]byte("application healthy"))
+		} else {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte("application un-healthy"))
+		}
+	})
 
 	controllers := []routes.RouteRegister{
 		routes.NewAppointmentRouteRegister(db),
@@ -76,6 +75,8 @@ func main() {
 	if err := http.ListenAndServe(":8080", r); err != nil {
 		log.Fatal("Unable to listen and serve", err)
 	}
+
+	log.Println("Ready to serve traffic...")
 	go awaitTerminated(done)
 }
 
