@@ -51,13 +51,15 @@ func NewTimeChecker(startSlot, endSlot time.Time) (*TimeChecker, error) {
 
 // Schedules only during business hours.
 func (t *TimeChecker) isPassedBusinessHours() error {
-	startZuluTime := t.times.startSlot.In(t.location)
-	endZuluTime := t.times.endSlot.In(t.location)
-	startTime, err := time.Parse(time.TimeOnly, startZuluTime.Format(time.TimeOnly))
+	start := t.times.startSlot.In(t.location)
+	end := t.times.endSlot.In(t.location)
+
+	startTime, err := time.Parse(time.TimeOnly, start.Format(time.TimeOnly))
 	if err != nil {
 		return err
 	}
-	endTime, err := time.Parse(time.TimeOnly, endZuluTime.Format(time.TimeOnly))
+
+	endTime, err := time.Parse(time.TimeOnly, end.Format(time.TimeOnly))
 	if err != nil {
 		return err
 	}
