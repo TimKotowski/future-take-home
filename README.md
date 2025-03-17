@@ -22,7 +22,7 @@ docker compose up
 - [x] Using Postgres
 - [x] Dockerfile or equivalent for the reviewer to follow setup steps
 - [x] Test Coverage
-  - Test Coverage is not fully done, due to the time constraints of the take home. It was recommended not to spend more than 3 hours on this
+  - Test Coverage is not fully done, due to the time constraints of the take home. It was recommended not to spend more than 3 hours on this (went little over and spent 4 hours on the take home assignment)
 
 ## Testing API
 `All Test data is seeded in migrations script based on JSON data provided for test`
@@ -37,7 +37,6 @@ docker compose up
 
 - Get a list of scheduled appointments for a trainer
   - ``http://localhost:8080/appointments/v1/slots/:trainerID``
-    - request body
 
 - Post a new appointment
   - ``http://localhost:8080/appointments/v1/slots/:trainerID/:userID``
