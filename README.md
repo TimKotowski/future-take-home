@@ -32,12 +32,7 @@ docker compose up
 `All Test data is seeded in migrations script based on JSON data provided for test`
 
 - Get a list of available appointment times for a trainer between two dates
-  - ``http://localhost:8080/appointments/v1/slots/:trainerID``
-    - request body 
-    ```
-    start_slot
-    end_slot
-    ```
+  - ``http://localhost:8080/appointments/v1/slots/:trainerID/:startSlot/:endSlot``
 
 - Get a list of scheduled appointments for a trainer
   - ``http://localhost:8080/appointments/v1/:trainerID``
