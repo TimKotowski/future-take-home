@@ -290,7 +290,6 @@ func TestCreateAppointmentsByTimeRangeController(t *testing.T) {
 
 	expectedStart, expectedEnd, err := utils.ParseStartEndSlots("2019-01-24T09:00:00-08:00", "2019-01-24T09:30:00-08:00")
 	data, err := io.ReadAll(res.Body)
-	fmt.Println(string(data))
 	assert.NoError(t, err)
 	var appointments []entities.Appointment
 	err = json.Unmarshal(data, &appointments)
