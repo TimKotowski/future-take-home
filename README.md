@@ -40,7 +40,7 @@ docker compose up
     ```
 
 - Get a list of scheduled appointments for a trainer
-  - ``http://localhost:8080/appointments/v1/slots/:trainerID``
+  - ``http://localhost:8080/appointments/v1/:trainerID``
 
 - Post a new appointment
   - ``http://localhost:8080/appointments/v1/slots/:trainerID/:userID``
